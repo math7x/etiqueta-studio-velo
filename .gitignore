@@ -1,0 +1,9 @@
+build/
+Etiqueta Studio.exe
+EtiquetaStudio.jar
+*.jasper
+*.log
+.test-output/
+.vs/
+bin/
+obj/

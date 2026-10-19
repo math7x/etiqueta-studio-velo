@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="etiqueta_32x22" columnCount="3" printOrder="Horizontal" pageWidth="294" pageHeight="62" columnWidth="91" columnSpacing="8" leftMargin="2" rightMargin="2" topMargin="2" bottomMargin="2">
+	<property name="ireport.zoom" value="8.000000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="57"/>
+	<parameter name="produtoUnicoId" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="totalEtiquetas" class="java.lang.Integer"/>
+	<parameter name="veloId" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
+	</parameter>
+	<parameter name="produtoGradeUnicoId" class="java.lang.String"/>
+	<parameter name="elevaEmpresaId" class="java.lang.String">
+		<defaultValueExpression><![CDATA["1"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[CALL prc_geraEtiquetaImprimir($P{produtoUnicoId},$P{produtoGradeUnicoId},$P{totalEtiquetas}, $P{elevaEmpresaId}, $P{veloId})]]>
+	</queryString>
+	<field name="produtoNome" class="java.lang.String"/>
+	<field name="codigoProduto" class="java.lang.String"/>
+	<field name="codBarras" class="java.lang.String"/>
+	<field name="precoVenda" class="java.math.BigDecimal"/>
+	<field name="unidadeVenda" class="java.lang.String"/>
+	<field name="produtoDescricao" class="java.lang.String"/>
+	<field name="coluna" class="java.lang.String"/>
+	<field name="linha" class="java.lang.String"/>
+	<field name="produtoMarca" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="58" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToTallestObject" x="9" y="1" width="75" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{produtoNome}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="9" y="23" width="79" height="21" isRemoveLineWhenBlank="true">
+					<printWhenExpression><![CDATA[$F{codBarras}.length() == 13]]></printWhenExpression>
+				</reportElement>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="EAN13" drawText="false" checksumRequired="false" barWidth="1" barHeight="20">
+					<jr:codeExpression><![CDATA[$F{codBarras}.substring(0,$F{codBarras}.length() - 1)]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField>
+				<reportElement x="3" y="18" width="82" height="6"/>
+				<textElement textAlignment="Center">
+					<font size="4" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codBarras}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="2" y="43" width="88" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{precoVenda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
