@@ -2,8 +2,6 @@
 
 Editor de etiquetas para Windows que gera **JRXML e JASPER compatíveis com JasperReports 3.7.2**. Abre em uma janela própria, sem lançar Chrome ou outro navegador.
 
-![Janela do aplicativo](docs/janela-windows.png)
-
 ## Baixar e usar
 
 1. Abra [Releases](https://github.com/math7x/etiqueta-studio-velo/releases/latest).
